@@ -1,17 +1,18 @@
 import java.util.*;
-public class Depth_First_Search {
-    public static void DFS(Map<String, List<String>> graph, String start) {
-        Set<String> visited = new HashSet<>();
-        Stack<String> stack = new Stack<>();
-        stack.push(start);
 
-        while (!stack.isEmpty()) {
-            String node = stack.pop();
+public class Breadth_First_Search {
+    public static void BFS(Map<String, List<String>> graph, String start) {
+        Set<String> visited = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+        queue.add(start);
+
+        while (!queue.isEmpty()) {
+            String node = queue.poll();
             if (!visited.contains(node)) {
                 System.out.print(node + " ");
                 visited.add(node);
                 for (String neighbor : graph.get(node)) {
-                    stack.push(neighbor);
+                    queue.add(neighbor);
                 }
             }
         }
@@ -26,7 +27,7 @@ public class Depth_First_Search {
         graph.put("F", Arrays.asList("G", "E"));
         graph.put("G", Arrays.asList("F", "B"));
 
-        System.out.print("DFS Order: ");
-        DFS(graph, "A");
+        System.out.print("BFS Order: ");
+        BFS(graph, "A");
     }
 }
